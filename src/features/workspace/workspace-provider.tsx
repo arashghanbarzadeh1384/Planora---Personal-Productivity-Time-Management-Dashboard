@@ -220,7 +220,13 @@ export function WorkspaceProvider({
   const saveNote = useCallback((note: Omit<Note, "id" | "updatedAt"> & { id?: string }) => {
     setState((current) => {
       const updated = { ...note, id: note.id ?? id(), updatedAt: format(new Date(), "yyyy-MM-dd") } as Note;
-      return { ...current, notes: note.id ? current.notes.map((item) => item.id === note.id ? updated : item) : [updated, ...current.notes] };
+      const exists = current.notes.some((item) => item.id === updated.id);
+      return {
+        ...current,
+        notes: exists
+          ? current.notes.map((item) => item.id === updated.id ? updated : item)
+          : [updated, ...current.notes],
+      };
     });
   }, []);
   const deleteNote = useCallback((noteId: string) => {
