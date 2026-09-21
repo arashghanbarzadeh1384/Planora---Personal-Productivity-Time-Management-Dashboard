@@ -1,0 +1,26 @@
+# dependencies
+node_modules
+.pnp
+.pnp.js
+
+# next
+.next
+.next-development
+.next-production
+out
+
+# environment
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# testing
+coverage
+
+# local agent scratch and verification logs
+work/
+
+# system
+.DS_Store
+*.pem
